@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node server.js\" \"node server_http.js\""
+    "start": "./node_modules/.bin/concurrently \"node server.js\" \"node server_http.js\""
   },
+  
   "dependencies": {
     "@grpc/grpc-js": "^1.3.2",
     "@grpc/proto-loader": "^0.6.10",
