@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gRPC Example</title>
+  <script>
+    async function grpcRequest(method, data) {
+      const response = await fetch(`http://localhost:3000/${method}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      return response.json();
+    }
+
+    async function createUser() {
+      const id = document.getElementById('create-id').value;
+      const name = document.getElementById('create-name').value;
+      const response = await grpcRequest('CreateUser', { id, name });
+      alert('User created: ' + JSON.stringify(response));
+    }
+
+    async function getUser() {
+      const id = document.getElementById('get-id').value;
+      const response = await grpcRequest('GetUserById', { id });
+      alert('User fetched: ' + JSON.stringify(response));
+    }
+
+    async function updateUser() {
+      const id = document.getElementById('update-id').value;
+      const name = document.getElementById('update-name').value;
+      const response = await grpcRequest('UpdateUser', { id, name });
+      alert('User updated: ' + JSON.stringify(response));
+    }
+
+    async function deleteUser() {
+      const id = document.getElementById('delete-id').value;
+      const response = await grpcRequest('DeleteUser', { id });
+      alert('User deleted: ' + JSON.stringify(response));
+    }
+  </script>
+</head>
+<body>
+  <h1>gRPC Example</h1>
+
+  <h2>Create User</h2>
+  <input id="create-id" placeholder="ID" />
+  <input id="create-name" placeholder="Name" />
+  <button onclick="createUser()">Create</button>
+
+  <h2>Get User</h2>
+  <input id="get-id" placeholder="ID" />
+  <button onclick="getUser()">Get</button>
+
+  <h2>Update User</h2>
+  <input id="update-id" placeholder="ID" />
+  <input id="update-name" placeholder="Name" />
+  <button onclick="updateUser()">Update</button>
+
+  <h2>Delete User</h2>
+  <input id="delete-id" placeholder="ID" />
+  <button onclick="deleteUser()">Delete</button>
+</body>
+</html>
