@@ -43,9 +43,9 @@ server.addService(exampleProto.UserService.service, {
   }
 });
 
-const port = process.env.PORT || 50051; 
-server.bindAsync(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure(), () => {
-  console.log(`Server running at http://0.0.0.0:${port}`);
+const grpcPort = 50051;
+server.bindAsync(`0.0.0.0:${grpcPort}`, grpc.ServerCredentials.createInsecure(), () => {
+  console.log(`gRPC server running at http://0.0.0.0:${grpcPort}`);
   server.start();
 });
 
